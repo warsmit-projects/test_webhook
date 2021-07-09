@@ -1,0 +1,18 @@
+name: tests
+on: [push]
+jobs:
+  cypress-run:
+    runs-on: ubuntu-latest
+    # let's make sure our tests pass on Chrome browser
+    name: Smoke testing
+    steps:
+      - uses: convictional/trigger-workflow-and-wait@master
+        with:
+          owner: warsmit-projects
+          repo: test_cypress
+          github_token: ${{ secrets.G_ACCESS_TOKEN }}
+          workflow_file_name: tests.yml
+      - name: Deploy Web App
+        run: |
+          echo "Deploy Web App"
+          sleep 10s
