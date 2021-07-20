@@ -6,7 +6,7 @@ jobs:
     # let's make sure our tests pass on Chrome browser
     name: Smoke testing
     steps:
-      - uses: convictional/trigger-workflow-and-wait@master
+      - uses: convictional/trigger-workflow-and-wait@v1.4.0
         with:
           owner: warsmit-projects
           repo: test_cypress
