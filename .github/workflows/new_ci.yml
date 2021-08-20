@@ -19,7 +19,8 @@ jobs:
       run: |
         ls -l ${GITHUB_WORKSPACE}/compiler
         # ls -l ${HOME}
-        sudo ${GITHUB_WORKSPACE}/compiler/test.sh
+        # sudo ${GITHUB_WORKSPACE}/compiler/test.sh
+        ${GITHUB_WORKSPACE}/compiler/test.sh
         ls -l "${HOME}/opt/test"
 
     - name: Downloading the Solidity compiler binaries
