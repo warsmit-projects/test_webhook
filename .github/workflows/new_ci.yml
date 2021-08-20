@@ -49,6 +49,6 @@ jobs:
     
     - name: run test
       #path ./compiler-tester
-      run: ./test.sh
+      run: sh ./test.sh
       env:
           PATH: "${PATH}:${{ env.SOLIDITY_COMPILER_BIN_PATH }}"
