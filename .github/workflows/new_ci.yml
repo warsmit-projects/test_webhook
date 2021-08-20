@@ -54,5 +54,5 @@ jobs:
         ls -l ${GITHUB_WORKSPACE}
         ls -l ${GITHUB_WORKSPACE}/tests
         sh ${GITHUB_WORKSPACE}/tests/test.sh
-      env:
-          PATH: "${PATH}:${{ env.SOLIDITY_COMPILER_BIN_PATH }}"
+      # env:
+      #     PATH: "${PATH}:${{ env.SOLIDITY_COMPILER_BIN_PATH }}"
