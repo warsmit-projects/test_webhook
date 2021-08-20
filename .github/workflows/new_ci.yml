@@ -45,10 +45,11 @@ jobs:
         ref: main
         submodules: true
         token: ${{ secrets.G_ACCESS_TOKEN }}
+        path: 'tests'
         #set path ./compiler-tester
     
     - name: run test
       #path ./compiler-tester
-      run: sh ./test.sh
+      run: sh ${GITHUB_WORKSPACE}/tests/test.sh
       env:
           PATH: "${PATH}:${{ env.SOLIDITY_COMPILER_BIN_PATH }}"
