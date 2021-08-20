@@ -6,8 +6,8 @@ jobs:
   build_llvm:
     name: test
     runs-on: ubuntu-latest
-    env:
-      SOLIDITY_COMPILER_BIN_PATH: ${HOME}/opt/solc
+    # env:
+    #   SOLIDITY_COMPILER_BIN_PATH: ${HOME}/opt/solc
     
     steps:
     - name: Checkout
@@ -28,16 +28,18 @@ jobs:
 
     - name: Downloading the Solidity compiler binaries
       run: |
-        mkdir -pv ${{ env.SOLIDITY_COMPILER_BIN_PATH }}
-        wget 'https://github.com/ethereum/solc-bin/raw/gh-pages/linux-amd64/solc-linux-amd64-v0.8.0%2Bcommit.c7dfd78e' --output-document "${{ env.SOLIDITY_COMPILER_BIN_PATH }}/solc-0.8.0"
-        wget 'https://github.com/ethereum/solc-bin/raw/gh-pages/linux-amd64/solc-linux-amd64-v0.8.1%2Bcommit.df193b15' --output-document "${{ env.SOLIDITY_COMPILER_BIN_PATH }}/solc-0.8.1"
-        wget 'https://github.com/ethereum/solc-bin/raw/gh-pages/linux-amd64/solc-linux-amd64-v0.8.2%2Bcommit.661d1103' --output-document "${{ env.SOLIDITY_COMPILER_BIN_PATH }}/solc-0.8.2"
-        wget 'https://github.com/ethereum/solc-bin/raw/gh-pages/linux-amd64/solc-linux-amd64-v0.8.3%2Bcommit.8d00100c' --output-document "${{ env.SOLIDITY_COMPILER_BIN_PATH }}/solc-0.8.3"
-        wget 'https://github.com/ethereum/solc-bin/raw/gh-pages/linux-amd64/solc-linux-amd64-v0.8.4%2Bcommit.c7e474f2' --output-document "${{ env.SOLIDITY_COMPILER_BIN_PATH }}/solc-0.8.4"
-        wget 'https://github.com/ethereum/solc-bin/raw/gh-pages/linux-amd64/solc-linux-amd64-v0.8.5%2Bcommit.a4f2e591' --output-document "${{ env.SOLIDITY_COMPILER_BIN_PATH }}/solc-0.8.5"
-        wget 'https://github.com/ethereum/solc-bin/raw/gh-pages/linux-amd64/solc-linux-amd64-v0.8.6%2Bcommit.11564f7e' --output-document "${{ env.SOLIDITY_COMPILER_BIN_PATH }}/solc-0.8.6"
-        wget 'https://github.com/ethereum/solc-bin/raw/gh-pages/linux-amd64/solc-linux-amd64-v0.8.7%2Bcommit.e28d00a7' --output-document "${{ env.SOLIDITY_COMPILER_BIN_PATH }}/solc-0.8.7"
-        echo ${{ env.SOLIDITY_COMPILER_BIN_PATH }} >> ${GITHUB_PATH}
+        mkdir -pv ${INPUT_SOLIDITY_COMPILER_BIN_PATH}
+        wget 'https://github.com/ethereum/solc-bin/raw/gh-pages/linux-amd64/solc-linux-amd64-v0.8.0%2Bcommit.c7dfd78e' --output-document "${INPUT_SOLIDITY_COMPILER_BIN_PATH}/solc-0.8.0"
+        wget 'https://github.com/ethereum/solc-bin/raw/gh-pages/linux-amd64/solc-linux-amd64-v0.8.1%2Bcommit.df193b15' --output-document "${INPUT_SOLIDITY_COMPILER_BIN_PATH}/solc-0.8.1"
+        wget 'https://github.com/ethereum/solc-bin/raw/gh-pages/linux-amd64/solc-linux-amd64-v0.8.2%2Bcommit.661d1103' --output-document "${INPUT_SOLIDITY_COMPILER_BIN_PATH}/solc-0.8.2"
+        wget 'https://github.com/ethereum/solc-bin/raw/gh-pages/linux-amd64/solc-linux-amd64-v0.8.3%2Bcommit.8d00100c' --output-document "${INPUT_SOLIDITY_COMPILER_BIN_PATH}/solc-0.8.3"
+        wget 'https://github.com/ethereum/solc-bin/raw/gh-pages/linux-amd64/solc-linux-amd64-v0.8.4%2Bcommit.c7e474f2' --output-document "${INPUT_SOLIDITY_COMPILER_BIN_PATH}/solc-0.8.4"
+        wget 'https://github.com/ethereum/solc-bin/raw/gh-pages/linux-amd64/solc-linux-amd64-v0.8.5%2Bcommit.a4f2e591' --output-document "${INPUT_SOLIDITY_COMPILER_BIN_PATH}/solc-0.8.5"
+        wget 'https://github.com/ethereum/solc-bin/raw/gh-pages/linux-amd64/solc-linux-amd64-v0.8.6%2Bcommit.11564f7e' --output-document "${INPUT_SOLIDITY_COMPILER_BIN_PATH}/solc-0.8.6"
+        wget 'https://github.com/ethereum/solc-bin/raw/gh-pages/linux-amd64/solc-linux-amd64-v0.8.7%2Bcommit.e28d00a7' --output-document "${INPUT_SOLIDITY_COMPILER_BIN_PATH}/solc-0.8.7"
+        echo ${INPUT_SOLIDITY_COMPILER_BIN_PATH} >> ${GITHUB_PATH}
+      with:
+        SOLIDITY_COMPILER_BIN_PATH: ${HOME}/opt/solc
     
     - name: Checkout tests
       uses: actions/checkout@v2
