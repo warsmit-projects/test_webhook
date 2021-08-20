@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
 
 echo "Building"
-touch ./1.txt
-mv 1.txt "${HOME}/opt/test/1.txt"
+touch "${GITHUB_WORKSPACE}/1.txt"
