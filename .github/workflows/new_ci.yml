@@ -15,6 +15,9 @@ jobs:
       with:
         path: 'compiler'
 
+    - name: Install sudo package
+      run: apt update && apt install sudo
+
     - name: test.sh
       run: |
         ls -l ${GITHUB_WORKSPACE}/compiler
