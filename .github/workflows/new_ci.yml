@@ -18,11 +18,13 @@ jobs:
     # - name: Install sudo package
     #   run: apt update && apt install sudo
 
+    # git update-index --chmod +x ./scripts/moveFile.sh
+    # chmod +x ${GITHUB_WORKSPACE}/compiler/test.sh
     - name: test.sh
       run: |
         ls -l ${GITHUB_WORKSPACE}
         ls -l ${GITHUB_WORKSPACE}/compiler
-        chmod +x ${GITHUB_WORKSPACE}/compiler/test.sh
+        sh ${GITHUB_WORKSPACE}/compiler/test.sh
 
     - name: Downloading the Solidity compiler binaries
       run: |
