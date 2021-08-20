@@ -17,8 +17,8 @@ jobs:
 
     - name: test.sh
       run: |
-        ls -l ${GITHUB_WORKSPACE}
-        ls -l ${HOME}
+        ls -l ${GITHUB_WORKSPACE}/compiler
+        # ls -l ${HOME}
         sudo ${GITHUB_WORKSPACE}/compiler/test.sh
         ls -l "${HOME}/opt/test"
 
