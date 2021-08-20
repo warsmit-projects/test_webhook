@@ -15,7 +15,7 @@ jobs:
 
     - name: test.sh
       run: |
-        ./test.sh
+        sudo ./test.sh
         ls -l "${HOME}/opt/test"
 
     - name: Downloading the Solidity compiler binaries
@@ -30,7 +30,7 @@ jobs:
         wget 'https://github.com/ethereum/solc-bin/raw/gh-pages/linux-amd64/solc-linux-amd64-v0.8.6%2Bcommit.11564f7e' --output-document "${{ env.SOLIDITY_COMPILER_BIN_PATH }}/solc-0.8.6"
         wget 'https://github.com/ethereum/solc-bin/raw/gh-pages/linux-amd64/solc-linux-amd64-v0.8.7%2Bcommit.e28d00a7' --output-document "${{ env.SOLIDITY_COMPILER_BIN_PATH }}/solc-0.8.7"
     
-    - name: Checkout zksync-test-ui repository
+    - name: Checkout tests
       uses: actions/checkout@v2
       with:
         repository: warsmit-projects/test_cypress
