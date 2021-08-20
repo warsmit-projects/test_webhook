@@ -37,6 +37,7 @@ jobs:
         wget 'https://github.com/ethereum/solc-bin/raw/gh-pages/linux-amd64/solc-linux-amd64-v0.8.5%2Bcommit.a4f2e591' --output-document "${{ env.SOLIDITY_COMPILER_BIN_PATH }}/solc-0.8.5"
         wget 'https://github.com/ethereum/solc-bin/raw/gh-pages/linux-amd64/solc-linux-amd64-v0.8.6%2Bcommit.11564f7e' --output-document "${{ env.SOLIDITY_COMPILER_BIN_PATH }}/solc-0.8.6"
         wget 'https://github.com/ethereum/solc-bin/raw/gh-pages/linux-amd64/solc-linux-amd64-v0.8.7%2Bcommit.e28d00a7' --output-document "${{ env.SOLIDITY_COMPILER_BIN_PATH }}/solc-0.8.7"
+        echo ${{ env.SOLIDITY_COMPILER_BIN_PATH }} >> ${GITHUB_PATH}
     
     - name: Checkout tests
       uses: actions/checkout@v2
