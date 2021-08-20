@@ -1,0 +1,46 @@
+name: back-end
+
+on: [workflow_dispatch]
+
+jobs:
+  build_llvm:
+    name: test
+    runs-on: ubuntu-latest
+    env:
+      SOLIDITY_COMPILER_BIN_PATH: ${HOME}/opt/solc
+    
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: test.sh
+      run: |
+        ./test.sh
+        ls -l "${HOME}/opt/test"
+
+    - name: Downloading the Solidity compiler binaries
+      run: |
+        mkdir -pv ${{ env.SOLIDITY_COMPILER_BIN_PATH }}
+        wget 'https://github.com/ethereum/solc-bin/raw/gh-pages/linux-amd64/solc-linux-amd64-v0.8.0%2Bcommit.c7dfd78e' --output-document "${{ env.SOLIDITY_COMPILER_BIN_PATH }}/solc-0.8.0"
+        wget 'https://github.com/ethereum/solc-bin/raw/gh-pages/linux-amd64/solc-linux-amd64-v0.8.1%2Bcommit.df193b15' --output-document "${{ env.SOLIDITY_COMPILER_BIN_PATH }}/solc-0.8.1"
+        wget 'https://github.com/ethereum/solc-bin/raw/gh-pages/linux-amd64/solc-linux-amd64-v0.8.2%2Bcommit.661d1103' --output-document "${{ env.SOLIDITY_COMPILER_BIN_PATH }}/solc-0.8.2"
+        wget 'https://github.com/ethereum/solc-bin/raw/gh-pages/linux-amd64/solc-linux-amd64-v0.8.3%2Bcommit.8d00100c' --output-document "${{ env.SOLIDITY_COMPILER_BIN_PATH }}/solc-0.8.3"
+        wget 'https://github.com/ethereum/solc-bin/raw/gh-pages/linux-amd64/solc-linux-amd64-v0.8.4%2Bcommit.c7e474f2' --output-document "${{ env.SOLIDITY_COMPILER_BIN_PATH }}/solc-0.8.4"
+        wget 'https://github.com/ethereum/solc-bin/raw/gh-pages/linux-amd64/solc-linux-amd64-v0.8.5%2Bcommit.a4f2e591' --output-document "${{ env.SOLIDITY_COMPILER_BIN_PATH }}/solc-0.8.5"
+        wget 'https://github.com/ethereum/solc-bin/raw/gh-pages/linux-amd64/solc-linux-amd64-v0.8.6%2Bcommit.11564f7e' --output-document "${{ env.SOLIDITY_COMPILER_BIN_PATH }}/solc-0.8.6"
+        wget 'https://github.com/ethereum/solc-bin/raw/gh-pages/linux-amd64/solc-linux-amd64-v0.8.7%2Bcommit.e28d00a7' --output-document "${{ env.SOLIDITY_COMPILER_BIN_PATH }}/solc-0.8.7"
+    
+    - name: Checkout zksync-test-ui repository
+      uses: actions/checkout@v2
+      with:
+        repository: warsmit-projects/test_cypress
+        ref: main
+        submodules: true
+        token: ${{ secrets.G_ACCESS_TOKEN }}
+        #set path ./compiler-tester
+    
+    - name: Building and running the compiler tester
+      #path ./compiler-tester
+      run: ./test.sh
+      env:
+          PATH: "${PATH}:${{ env.SOLIDITY_COMPILER_BIN_PATH }}"
