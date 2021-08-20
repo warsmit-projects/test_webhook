@@ -1,6 +1,6 @@
 name: back-end
 
-on: [workflow_dispatch]
+on: [workflow_dispatch, push]
 
 jobs:
   build_llvm:
@@ -15,8 +15,8 @@ jobs:
       with:
         path: 'compiler'
 
-    - name: Install sudo package
-      run: apt update && apt install sudo
+    # - name: Install sudo package
+    #   run: apt update && apt install sudo
 
     - name: test.sh
       run: |
