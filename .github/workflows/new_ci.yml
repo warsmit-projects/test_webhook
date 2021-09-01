@@ -17,10 +17,10 @@ jobs:
     # chmod +x ${GITHUB_WORKSPACE}/compiler/test.sh
     - name: test.sh
       run: |
+        pwd
         ls -l
-        ls -l compiler
-        sh compiler/test.sh
-      working-directory: ${env.GITHUB_WORKSPACE}
+        sh test.sh
+      working-directory: compiler
 
     - name: Downloading the Solidity compiler binaries
       run: |
