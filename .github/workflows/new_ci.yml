@@ -20,7 +20,7 @@ jobs:
         ls -l
         ls -l compiler
         sh compiler/test.sh
-      working-directory: ${GITHUB_WORKSPACE}
+      working-directory: ${env.GITHUB_WORKSPACE}
 
     - name: Downloading the Solidity compiler binaries
       run: |
