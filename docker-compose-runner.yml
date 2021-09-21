@@ -1,0 +1,10 @@
+version: '3.2'
+services:
+  zk:
+    image: "matterlabs/zk-environment:latest"
+    command: tail -f /dev/null
+    volumes:
+      - ${GITHUB_WORKSPACE}:/usr/src/zksync
+    working_dir: /usr/src/zksync
+    environment:
+      - IN_DOCKER=true

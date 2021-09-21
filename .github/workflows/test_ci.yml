@@ -1,0 +1,41 @@
+name: test
+
+on: [pull_request, push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        path: test
+
+    - name: Checkout tests
+      uses: actions/checkout@v2
+      with:
+        repository: warsmit-projects/test_cypress
+        ref: main
+        submodules: true
+        token: ${{ secrets.G_ACCESS_TOKEN }}
+        path: 'test_cypress'
+
+    - name: prepare
+      shell: bash
+      run: |
+        echo "DOCKER_RUNNER=docker-compose -f ${{github.workspace}}/test/docker-compose-runner.yml" >> $GITHUB_ENV
+        echo "DOCKER_RUN=docker-compose -f ${{github.workspace}}/test/docker-compose-runner.yml exec -T zk" >> $GITHUB_ENV
+    
+    - name: start-services
+      run: |
+        ${DOCKER_RUNNER} down
+        ${DOCKER_RUNNER} pull
+        ${DOCKER_RUNNER} up --build -d zk
+        ${DOCKER_RUNNER} exec -T zk sccache --start-server
+
+    - run: ${DOCKER_RUN} sh -c "mkdir ~/.ssh && ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts"
+    - run: ${DOCKER_RUN} sh -c 'eval "$(ssh-agent -s)"'
+    - run: ${DOCKER_RUN} sh -c "ssh-add" || true
+    #DEBUG
+    - run: ${DOCKER_RUN} sh -c "ssh -vT git@github.com" || true
