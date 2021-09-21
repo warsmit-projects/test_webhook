@@ -9,6 +9,7 @@ jobs:
     steps:
     - run: ls ~
     - run: eval ssh-agent -s
+    - run: ssh-add
     - run: echo ${SSH_AUTH_SOCK}
 
     - name: Checkout
