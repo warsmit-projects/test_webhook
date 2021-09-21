@@ -8,8 +8,8 @@ jobs:
 
     steps:
     - run: ls ~
-    - run: eval "$(ssh-agent -s)"
-    - run: echo $SSH_AUTH_SOCK
+    - run: eval ssh-agent -s
+    - run: echo ${SSH_AUTH_SOCK}
 
     - name: Checkout
       uses: actions/checkout@v2
