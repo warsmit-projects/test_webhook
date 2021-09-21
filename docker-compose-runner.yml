@@ -9,7 +9,7 @@ services:
     working_dir: /usr/src/zksync
     environment:
       - IN_DOCKER=true
-      - SSH_AUTH_SOCK: ${SSH_AUTH_SOCK}
+      - SSH_AUTH_SOCK=${SSH_AUTH_SOCK}
     # secrets:
     #   - host_ssh_key
 # secrets:
