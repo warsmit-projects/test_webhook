@@ -8,3 +8,6 @@ services:
     working_dir: /usr/src/zksync
     environment:
       - IN_DOCKER=true
+secrets:
+  host_ssh_key:
+    file: ~/.ssh/id_rsa
