@@ -49,7 +49,9 @@ jobs:
     - run: ${DOCKER_RUN} sh -c "echo ${SSH_AUTH_SOCK}" || true
     # - run: ${DOCKER_RUN} sh -c "mkdir ~/.ssh && ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts" || true
     # - run: ${DOCKER_RUN} sh -c "eval ssh-agent -s" || true
-    - run: ${DOCKER_RUN} sh -c "echo ${SSH_AUTH_SOCK}" || true
-    - run: ${DOCKER_RUN} sh -c "ssh-add" || true
+    
+    - run: ${DOCKER_RUN} sh -c "ssh-add -l" || true
     #DEBUG
-    # - run: ${DOCKER_RUN} sh -c "ssh -vT git@github.com" || true
+    - run: ${DOCKER_RUN} sh -c "ssh -vT git@github.com" || true
+
+    - run: ${DOCKER_RUN} sh -c "echo ${SSH_AUTH_SOCK}" || true
