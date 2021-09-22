@@ -23,15 +23,14 @@ jobs:
 
     - run: echo ${SSH_AUTH_SOCK}
 
-
-    # - name: Checkout tests
-    #   uses: actions/checkout@v2
-    #   with:
-    #     repository: warsmit-projects/test_cypress
-    #     ref: main
-    #     submodules: true
-    #     token: ${{ secrets.G_ACCESS_TOKEN }}
-    #     path: 'test_cypress'
+    - name: Checkout tests
+      uses: actions/checkout@v2
+      with:
+        repository: warsmit-projects/test_cypress
+        ref: main
+        submodules: true
+        token: ${{ secrets.G_ACCESS_TOKEN }}
+        path: 'test_cypress'
 
     - name: prepare
       shell: bash
@@ -55,3 +54,5 @@ jobs:
     - run: ${DOCKER_RUN} sh -c "ssh -vT git@github.com" || true
 
     - run: ${DOCKER_RUN} sh -c "echo ${SSH_AUTH_SOCK}" || true
+
+    - run: ${DOCKER_RUN} sh -c "cd test_cypress && cargo build --verbose"
