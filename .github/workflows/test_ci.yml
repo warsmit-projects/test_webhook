@@ -53,4 +53,4 @@ jobs:
     # #DEBUG
     # - run: ${DOCKER_RUN} sh -c "ssh -vT git@github.com" || true
 
-    - run: ${DOCKER_RUN} sh -c "cd test_cypress && cargo build --verbose --bin temp"
+    - run: ${DOCKER_RUN} sh -c "cd test_cypress && cargo build"
